@@ -157,6 +157,33 @@ svg{display:block}
 .gitem .n{width:18px;flex:none;color:#9aa1a8;font-size:12px}
 .gitem .b{margin-left:auto;font-size:11px;color:#9aa1a8;flex:none}
 
+#dm{position:absolute;inset:0;z-index:40;background:#fff;display:none;flex-direction:column;padding-top:var(--sbh)}
+#dm.on{display:flex}
+.dmh{flex:none;height:50px;display:flex;align-items:center;gap:12px;padding:0 14px;font-size:18px;font-weight:700;border-bottom:.5px solid #efefef}
+.dmh .who{line-height:1.2;font-size:14.5px;min-width:0}
+.dmh .who b{font-weight:600;display:flex;align-items:center;gap:4px}
+.dmh .who small{font-size:11.5px;color:#737373;font-weight:400}
+.dmh .sp{margin-left:auto;display:flex;gap:18px}
+.dml{flex:1;overflow-y:auto;scrollbar-width:none;padding-top:6px}
+.dmr{display:flex;align-items:center;gap:12px;width:100%;padding:8px 16px;text-align:left}
+.dmr .t{flex:1;min-width:0;line-height:1.3}
+.dmr .t b{font-weight:400;font-size:14.5px;display:flex;align-items:center;gap:4px}
+.dmr .t span{display:block;font-size:13.5px;color:#737373;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dmr.un .t b{font-weight:700}
+.dmr.un .t span{color:#000;font-weight:600}
+.dmr .ud{width:8px;height:8px;border-radius:50%;background:#0095f6;flex:none}
+.dmb{flex:1;overflow-y:auto;padding:10px 12px 14px;display:flex;flex-direction:column;gap:4px;scrollbar-width:none}
+.dmb .ts{align-self:center;font-size:12px;color:#737373;margin:8px 0 10px}
+.bub{align-self:flex-start;max-width:74%;margin-left:40px;background:#efefef;border-radius:20px;padding:9px 14px;font-size:14.5px;line-height:1.35}
+.brow{display:flex;align-items:flex-end;gap:8px}
+.brow .bub{margin-left:0}
+.fcard{align-self:flex-start;margin-left:40px;width:266px;max-width:74%;border-radius:20px;overflow:hidden;background:#efefef;position:relative}
+.fcard .fm{position:relative}
+.fcard .cb{display:flex;align-items:center;justify-content:space-between;width:100%;height:44px;padding:0 14px;font-weight:600;font-size:14px;text-align:left}
+.fcard .cb span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dmc{flex:none;margin:6px 12px 12px;height:44px;border-radius:22px;background:#efefef;display:flex;align-items:center;gap:10px;padding:0 14px 0 5px;color:#737373;font-size:14.5px}
+.dmc i{width:34px;height:34px;border-radius:50%;background:#3797f0;color:#fff;display:grid;place-items:center}
+.dmc span{flex:1}
 .srch{margin:8px 14px 10px;height:36px;border-radius:10px;background:#efefef;display:flex;align-items:center;gap:8px;padding:0 12px;color:#737373;font-size:15px}
 .xgrid{flex:1;overflow-y:auto;overscroll-behavior:contain;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;grid-auto-flow:dense;align-content:start;scrollbar-width:none;background:#fff}
 .xgrid::-webkit-scrollbar{display:none}
@@ -212,11 +239,12 @@ svg{display:block}
       <div class="xgrid" id="xgrid"></div>
     </section>
     <nav class="tabs" id="tabs"></nav>
+    <div id="dm"></div>
     <div id="story"></div>
     <div id="sheet" onclick="if(event.target===this)closeSite()"></div>
   </div>
 </div></div>
-<button class="gpill" id="gpill" onclick="toggleGuide()" aria-expanded="false">Ad formats <i>4</i></button>
+<button class="gpill" id="gpill" onclick="toggleGuide()" aria-expanded="false">Ad formats <i>5</i></button>
 <div class="gscrim" id="gscrim" onclick="toggleGuide(false)"></div>
 <div class="gpanel" id="gpanel" role="dialog" aria-label="Ad formats"></div>
 
@@ -258,6 +286,12 @@ const BR = {
     variants:[{n:"White"},{n:"Olive"},{n:"Blue"}] },
   bose:{ name:"Best Buy", h:"bestbuy", domain:"bestbuy.com", url:"https://www.bestbuy.com/product/bose-quietcomfort-ultra-2nd-gen-true-wireless-noise-cancelling-in-ear-earbuds-black/6628900", color:"#0046be", logo:"BEST<br>BUY", ls:"font-weight:800;font-size:7.5px;line-height:1;text-align:center",
     src:"https://native-ads-dev.appless.workers.dev/6a9733389e74536944cd96bd_baspn2/ad.js", base:[540,540], cta:"Shop now",
+    variants:[{},{},{}] },
+  airbnb:{ name:"Airbnb", h:"airbnb", domain:"airbnb.com", url:"https://www.airbnb.com/", color:"#ff385c", logo:"airbnb", ls:"font-weight:800;font-size:7.5px", fontScan:true,
+    src:"https://native-ads.appless.workers.dev/6aa2aef14954ac6f0d9dcd05_ddladj/ad.js", base:[560,420], cta:"Book now",
+    variants:[{},{},{}] },
+  bark:{ name:"BARK", h:"barkbox", domain:"bark.co", url:"https://bark.co/", color:"#1f4fd8", logo:"BARK", ls:"font-weight:900;font-size:8.5px",
+    src:"https://native-ads-dev.appless.workers.dev/6a8e82a03252dba34b484fa9_zi294y/ad.js", base:[540,540], cta:"Shop now",
     variants:[{},{},{}] },
   gap:{ name:"Gap", h:"gap", domain:"gap.com", url:"https://www.gap.com/", color:"#0b2a5b", logo:"GAP", ls:"font-family:Georgia,serif;font-weight:400;font-size:10px;letter-spacing:.5px", adConfig:CFG_DV,
     src:"https://native-ads-dev.appless.workers.dev/mti1bs/ad.js", base:[540,540], cta:"Shop now", verb:"Shop",
@@ -449,6 +483,36 @@ function renderExplore(){
   $("#xgrid").querySelectorAll(".flick").forEach(h=>io.observe(h));
 }
 
+// ---------- messages ----------
+const DMS = [
+  {b:"nike", t:"2m", un:1, msgs:["Universa is here. Three looks, built to move with you.","Tap a look in the video to switch it."]},
+  {a:"coast", t:"1h", pv:"Sent a reel by saltline.surf"},
+  {b:"airbnb", t:"3h", un:1, msgs:["Your next stay, three ways.","Tap a home in the video to step inside."]},
+  {a:"dog", t:"5h", pv:"Liked a message"},
+  {b:"bark", t:"1d", msgs:["This month's box just dropped.","Tap a toy in the video to see it in action."]},
+  {a:"home", t:"1d", pv:"Seen yesterday"},
+  {a:"trail", t:"2d", pv:"That ridge though"}
+];
+const DM = {on:false};
+const BACK = `<span style="display:block;transform:scaleX(-1)">${I.chev(26)}</span>`;
+function openDM(i){ closeStory(); show("home"); DM.on=true; $("#dm").classList.add("on"); setDark(); i==null ? drawInbox() : drawThread(i); }
+function closeDM(){ if(!DM.on) return; const h=$("#dm .flick"); h&&unmountOne(h); DM.on=false; $("#dm").classList.remove("on"); $("#dm").innerHTML=""; setDark(); }
+function drawInbox(){
+  const h=$("#dm .flick"); h&&unmountOne(h);
+  $("#dm").innerHTML=`<div class="dmh"><button onclick="closeDM()" aria-label="Back">${BACK}</button><span>Messages</span><span class="sp">${I.plus(25)}</span></div><div class="dml">`+
+    DMS.map((d,i)=>{ const B=d.b&&BR[d.b], A=d.a&&AC[d.a];
+      return `<button class="dmr ${d.un?"un":""}" ${B?`onclick="drawThread(${i})"`:""}>${B?bav(d.b,56):pav(A.av,56)}<span class="t"><b>${B?B.h+I.vf:A.h}</b><span>${esc(B?d.msgs[d.msgs.length-1]:d.pv)} · ${d.t}</span></span>${d.un?`<i class="ud"></i>`:""}${I.cam(24)}</button>`; }).join("")+`</div>`;
+}
+function drawThread(i){
+  const d=DMS[i], B=BR[d.b], host=flickHost(d.b), id="s"+slotSeq; d.un=0;
+  $("#dm").innerHTML=`<div class="dmh"><button onclick="drawInbox()" aria-label="Back">${BACK}</button>${bav(d.b,34)}<div class="who"><b>${B.h}${I.vf}</b><small>Business chat</small></div><span class="sp">${I.more(24)}</span></div>
+    <div class="dmb"><div class="ts">Today</div><div class="bub">${esc(d.msgs[0])}</div>
+      <div class="fcard" data-fmt="dm"><div class="fm" style="aspect-ratio:${B.base[0]}/${B.base[1]}">${host}</div><button class="cb" onclick="openSite('${id}')"><span data-cta="${id}">${B.cta}</span>${I.chev(18)}</button></div>
+      <div class="brow">${bav(d.b,32)}<div class="bub">${esc(d.msgs[1])}</div></div></div>
+    <div class="dmc"><i>${I.cam(20)}</i><span>Message...</span>${I.heart(24)}</div>`;
+  mountOne($("#dm .flick"));
+}
+
 // ---------- stories ----------
 const STORIES = [
   {ad:"coach"},
@@ -495,13 +559,13 @@ function stepStory(d){
   ST.p=p; ST.i=i; drawStory();
 }
 addEventListener("keydown", e=>{
-  if(e.key==="Escape"){ if($("#sheet").classList.contains("on")) closeSite(); else if(ST.on) closeStory(); toggleGuide(false); }
+  if(e.key==="Escape"){ if($("#sheet").classList.contains("on")) closeSite(); else if(ST.on) closeStory(); else closeDM(); toggleGuide(false); }
   if(ST.on && !ST.hold){ if(e.key==="ArrowRight") stepStory(1); if(e.key==="ArrowLeft") stepStory(-1); }
 });
 
 // ---------- shell ----------
 let VIEW="home";
-function setDark(){ $("#phone").classList.toggle("dark", ST.on || VIEW==="reels"); document.body.classList.toggle("at-home", VIEW==="home" && !ST.on); }
+function setDark(){ $("#phone").classList.toggle("dark", ST.on || VIEW==="reels"); document.body.classList.toggle("at-home", VIEW==="home" && !ST.on && !DM.on); }
 function show(v){
   VIEW=v; $("#v-home").classList.toggle("on",v==="home"); $("#v-reels").classList.toggle("on",v==="reels"); $("#v-explore").classList.toggle("on",v==="explore");
   if(v==="reels") $("#reels").scrollTop=0;
@@ -510,14 +574,15 @@ function show(v){
 }
 
 // ---------- ad format selector ----------
-const FMTS = [["Reels ads","reels","Zara, Acer"],["Stories ads","stories","Coach, Cadillac, Nike"],["Feed ads","feed","Gap, Mercedes, LEGO"],["Explore tiles","explore","Levi's, Bentley, Bose"]];
+const FMTS = [["Reels ads","reels","Zara, Acer"],["Stories ads","stories","Coach, Cadillac, Nike"],["Feed ads","feed","Gap, Mercedes, LEGO"],["Explore tiles","explore","Levi's, Bentley, Bose"],["Messages","dm","Nike, Airbnb, BARK"]];
 function toggleGuide(force){
   const p=$("#gpanel"), on = typeof force==="boolean" ? force : !p.classList.contains("on");
   p.classList.toggle("on",on); $("#gscrim").classList.toggle("on",on); $("#gpill").setAttribute("aria-expanded",on);
 }
 function pulse(el){ if(!el) return; el.classList.remove("pulse"); void el.offsetWidth; el.classList.add("pulse"); }
 function jump(f){
-  toggleGuide(false); closeSite();
+  toggleGuide(false); closeSite(); closeDM();
+  if(f==="dm"){ openDM(0); pulse($("#dm .fcard")); return; }
   document.querySelectorAll(".gitem").forEach(el=>el.classList.toggle("cur",el.dataset.f===f));
   if(f==="stories"){ openStory(STORIES.findIndex(p=>p.ad)); pulse($("#story .smedia")); return; }
   closeStory();
@@ -531,12 +596,12 @@ function fitPhone(){
 }
 addEventListener("resize",fitPhone);
 
-$("#hdic").innerHTML=`<span class="dot">${I.heart(26)}</span><span class="dot">${I.chat(26)}</span>`;
+$("#hdic").innerHTML=`<span class="dot">${I.heart(26)}</span><button class="dot" onclick="openDM()" aria-label="Messages">${I.chat(26)}</button>`;
 $("#rcam").innerHTML=I.cam(26);
 $("#gpanel").innerHTML=`<h6>Flicks on Instagram</h6>`+FMTS.map(([t,f,b],i)=>`<button class="gitem" data-f="${f}" onclick="jump('${f}')"><span class="n">${i+1}</span>${t}<span class="b">${b}</span></button>`).join("");
 $("#srch").innerHTML=I.search(17)+"<span>Search</span>";
 renderFeed(); renderReels(); renderExplore(); show("home"); fitPhone();
-const H0=location.hash.replace("#",""); if(["reels","stories","feed","explore"].includes(H0)) setTimeout(()=>jump(H0),300);
+const H0=location.hash.replace("#",""); if(["reels","stories","feed","explore","dm"].includes(H0)) setTimeout(()=>jump(H0),300);
 </script>
 </body>
 </html>
