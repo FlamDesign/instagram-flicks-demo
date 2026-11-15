@@ -477,7 +477,7 @@ function renderExplore(){
   let pi=0, fi=0;
   $("#xgrid").innerHTML = pat.map(k=>{
     if(k==="s"){ const id=XPH[pi++%XPH.length]; return `<div class="xt" style="background-image:url(${U(id,400,400)})">${pi%4===2?`<span class="ri">${I.reel(18,true)}</span>`:""}</div>`; }
-    return `<div class="xt big${k==="Fr"?" r":""}" data-fmt="explore">${flickHost(XFL[fi++],false)}</div>`;
+    return `<div class="xt big${k==="Fr"?" r":""}" data-fmt="explore">${flickHost(XFL[fi++])}</div>`;
   }).join("");
   const io=new IntersectionObserver(es=>es.forEach(en=>{ en.isIntersecting ? mountOne(en.target) : unmountOne(en.target); }),{root:$("#xgrid"),rootMargin:"60px 0px"});
   $("#xgrid").querySelectorAll(".flick").forEach(h=>io.observe(h));
