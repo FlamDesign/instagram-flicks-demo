@@ -423,14 +423,14 @@ function closeSite(){ $("#sheet").classList.remove("on"); ST.hold=false; ST.t0=D
 
 // ---------- feed ----------
 const FEED = [
-  {a:"coast", loc:"Positano, Italy", img:"1561956021-947f09ae0101", likes:"4,812", com:"96", cap:"Woke up to this. Staying one more night.", when:"2 hours ago"},
   {ad:"cayman", likes:"31.4K", com:"627", cap:"The VaCay you deserve."},
-  {a:"dog", loc:"Cannon Beach, Oregon", img:"1530281700549-e82e7bf110d6", likes:"1,930", com:"74", cap:"Zero thoughts. Just beach.", when:"5 hours ago"},
+  {a:"coast", loc:"Positano, Italy", img:"1561956021-947f09ae0101", likes:"4,812", com:"96", cap:"Woke up to this. Staying one more night.", when:"2 hours ago"},
   {ad:"gap", likes:"12.4K", com:"208", cap:"Fall layers are here."},
-  {a:"home", img:"1583847268964-b28dc8f51f92", likes:"2,247", com:"41", cap:"Sunday light in the front room. Nothing styled, promise.", when:"8 hours ago"},
+  {a:"dog", loc:"Cannon Beach, Oregon", img:"1530281700549-e82e7bf110d6", likes:"1,930", com:"74", cap:"Zero thoughts. Just beach.", when:"5 hours ago"},
   {ad:"merc", likes:"18.3K", com:"412", cap:"The new S-Class."},
-  {a:"tokyo", loc:"Shinjuku, Tokyo", img:"1601042879364-f3947d3f9c16", likes:"9,574", com:"152", cap:"Rain makes this city twice as bright.", when:"1 day ago"},
-  {ad:"lego", likes:"26.1K", com:"538", cap:"Small brick. Big possibilities."}
+  {a:"home", img:"1583847268964-b28dc8f51f92", likes:"2,247", com:"41", cap:"Sunday light in the front room. Nothing styled, promise.", when:"8 hours ago"},
+  {ad:"lego", likes:"26.1K", com:"538", cap:"Small brick. Big possibilities."},
+  {a:"tokyo", loc:"Shinjuku, Tokyo", img:"1601042879364-f3947d3f9c16", likes:"9,574", com:"152", cap:"Rain makes this city twice as bright.", when:"1 day ago"}
 ];
 function actions(likes,com){
   return `<div class="act"><button onclick="this.classList.toggle('liked')" aria-label="Like">${I.heart(25)}${likes}</button><button aria-label="Comment">${I.chat(25)}${com}</button><button aria-label="Share">${I.send(25)}</button><button class="sv" onclick="this.classList.toggle('saved')" aria-label="Save">${I.save(25)}</button></div>`;
