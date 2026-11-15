@@ -293,6 +293,9 @@ const BR = {
   bark:{ name:"BARK", h:"barkbox", domain:"bark.co", url:"https://bark.co/", color:"#1f4fd8", logo:"BARK", ls:"font-weight:900;font-size:8.5px",
     src:"https://native-ads-dev.appless.workers.dev/6a8e82a03252dba34b484fa9_zi294y/ad.js", base:[540,540], cta:"Shop now",
     variants:[{},{},{}] },
+  cayman:{ name:"Cayman Islands", h:"visitcaymanislands", domain:"visitcaymanislands.com", url:"https://www.visitcaymanislands.com/", color:"#0d7f8c", logo:"CI", ls:"font-family:Georgia,serif;font-weight:400;font-size:13px;letter-spacing:.5px",
+    src:"https://native-ads.appless.workers.dev/6aa776159846b99b24d49ce4_m1ugyq/ad.js", base:[540,540], cta:"Book now",
+    variants:[{},{},{}] },
   gap:{ name:"Gap", h:"gap", domain:"gap.com", url:"https://www.gap.com/", color:"#0b2a5b", logo:"GAP", ls:"font-family:Georgia,serif;font-weight:400;font-size:10px;letter-spacing:.5px", adConfig:CFG_DV,
     src:"https://native-ads-dev.appless.workers.dev/mti1bs/ad.js", base:[540,540], cta:"Shop now", verb:"Shop",
     variants:[{n:"Denim Relaxed Shirt",url:"https://www.gap.com/browse/product.do?pid=901884002&vid=REGULAR"},{n:"Icon Corduroy Jacket",url:"https://www.gap.com/browse/product.do?pid=913461022&vid=1"},{n:"CashSoft Crew Sweater",url:"https://gap.com/browse/product.do?pid=907276072&vid=REGULAR"}] },
@@ -413,12 +416,13 @@ function closeSite(){ $("#sheet").classList.remove("on"); ST.hold=false; ST.t0=D
 // ---------- feed ----------
 const FEED = [
   {a:"coast", loc:"Positano, Italy", img:"1561956021-947f09ae0101", likes:"4,812", com:"96", cap:"Woke up to this. Staying one more night.", when:"2 hours ago"},
-  {ad:"gap", likes:"12.4K", com:"208", cap:"Three fall layers, one video. Tap a look to switch it."},
+  {ad:"cayman", likes:"31.4K", com:"627", cap:"The VaCay you deserve. Tap to pick your kind of day."},
   {a:"dog", loc:"Cannon Beach, Oregon", img:"1530281700549-e82e7bf110d6", likes:"1,930", com:"74", cap:"Zero thoughts. Just beach.", when:"5 hours ago"},
-  {ad:"merc", likes:"18.3K", com:"412", cap:"The new S-Class. Pick a finish in the video."},
+  {ad:"gap", likes:"12.4K", com:"208", cap:"Three fall layers, one video. Tap a look to switch it."},
   {a:"home", img:"1583847268964-b28dc8f51f92", likes:"2,247", com:"41", cap:"Sunday light in the front room. Nothing styled, promise.", when:"8 hours ago"},
-  {ad:"lego", likes:"26.1K", com:"538", cap:"Small brick. Big possibilities. Tap a car to switch the build."},
-  {a:"tokyo", loc:"Shinjuku, Tokyo", img:"1601042879364-f3947d3f9c16", likes:"9,574", com:"152", cap:"Rain makes this city twice as bright.", when:"1 day ago"}
+  {ad:"merc", likes:"18.3K", com:"412", cap:"The new S-Class. Pick a finish in the video."},
+  {a:"tokyo", loc:"Shinjuku, Tokyo", img:"1601042879364-f3947d3f9c16", likes:"9,574", com:"152", cap:"Rain makes this city twice as bright.", when:"1 day ago"},
+  {ad:"lego", likes:"26.1K", com:"538", cap:"Small brick. Big possibilities. Tap a car to switch the build."}
 ];
 function actions(likes,com){
   return `<div class="act"><button onclick="this.classList.toggle('liked')" aria-label="Like">${I.heart(25)}${likes}</button><button aria-label="Comment">${I.chat(25)}${com}</button><button aria-label="Share">${I.send(25)}</button><button class="sv" onclick="this.classList.toggle('saved')" aria-label="Save">${I.save(25)}</button></div>`;
@@ -574,7 +578,7 @@ function show(v){
 }
 
 // ---------- ad format selector ----------
-const FMTS = [["Reels ads","reels","Zara, Acer"],["Stories ads","stories","Coach, Cadillac, Nike"],["Feed ads","feed","Gap, Mercedes, LEGO"],["Explore tiles","explore","Levi's, Bentley, Bose"],["Messages","dm","Nike, Airbnb, BARK"]];
+const FMTS = [["Reels ads","reels","Zara, Acer"],["Stories ads","stories","Coach, Cadillac, Nike"],["Feed ads","feed","Cayman, Gap, Mercedes, LEGO"],["Explore tiles","explore","Levi's, Bentley, Bose"],["Messages","dm","Nike, Airbnb, BARK"]];
 function toggleGuide(force){
   const p=$("#gpanel"), on = typeof force==="boolean" ? force : !p.classList.contains("on");
   p.classList.toggle("on",on); $("#gscrim").classList.toggle("on",on); $("#gpill").setAttribute("aria-expanded",on);
