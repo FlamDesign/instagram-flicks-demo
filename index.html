@@ -157,6 +157,13 @@ svg{display:block}
 .gitem .n{width:18px;flex:none;color:#9aa1a8;font-size:12px}
 .gitem .b{margin-left:auto;font-size:11px;color:#9aa1a8;flex:none}
 
+.srch{margin:8px 14px 10px;height:36px;border-radius:10px;background:#efefef;display:flex;align-items:center;gap:8px;padding:0 12px;color:#737373;font-size:15px}
+.xgrid{flex:1;overflow-y:auto;overscroll-behavior:contain;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;grid-auto-flow:dense;align-content:start;scrollbar-width:none;background:#fff}
+.xgrid::-webkit-scrollbar{display:none}
+.xt{position:relative;aspect-ratio:1;background:#efefef center/cover;overflow:hidden;color:#fff}
+.xt.big{grid-column:1/span 2;grid-row:span 2;aspect-ratio:auto}
+.xt.big.r{grid-column:2/span 2}
+.xt .ri{position:absolute;right:7px;top:7px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}
 .rfl .rail{top:auto;bottom:12px;right:6px;gap:16px}
 .rfl .shade2{position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(180deg,transparent 66%,rgba(0,0,0,.62))}
 .rinfo{position:absolute;left:14px;right:70px;bottom:12px;z-index:4;pointer-events:none;font-size:13.5px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.45)}
@@ -200,12 +207,16 @@ svg{display:block}
       <div class="rhd"><span>Reels</span><span id="rcam"></span></div>
       <div class="reels" id="reels"></div>
     </section>
+    <section class="view" id="v-explore">
+      <header class="hd"><div class="srch" id="srch"></div></header>
+      <div class="xgrid" id="xgrid"></div>
+    </section>
     <nav class="tabs" id="tabs"></nav>
     <div id="story"></div>
     <div id="sheet" onclick="if(event.target===this)closeSite()"></div>
   </div>
 </div></div>
-<button class="gpill" id="gpill" onclick="toggleGuide()" aria-expanded="false">Ad formats <i>3</i></button>
+<button class="gpill" id="gpill" onclick="toggleGuide()" aria-expanded="false">Ad formats <i>4</i></button>
 <div class="gscrim" id="gscrim" onclick="toggleGuide(false)"></div>
 <div class="gpanel" id="gpanel" role="dialog" aria-label="Ad formats"></div>
 
@@ -232,6 +243,21 @@ const BR = {
     variants:[{n:"Optiq"},{n:"Celestiq"},{n:"Escalade-V"}] },
   nike:{ name:"Nike", h:"nike", domain:"nike.com", url:"https://www.nike.com/", color:"#111", logo:"NIKE", ls:"font-style:italic;font-weight:900;font-size:9px", grad:"linear-gradient(180deg,#3b3b3d,#111)",
     src:"https://native-ads-dev.appless.workers.dev/6a97885c9e74536944d35d53_dsefds/ad.js", base:[540,540], cta:"Shop now",
+    variants:[{},{},{}] },
+  merc:{ name:"Mercedes-Benz", h:"mercedesbenz", domain:"mbusa.com", url:"https://www.mbusa.com/en/vehicles/class/s-class/sedan", color:"#000", logo:"MB", ls:"font-family:Georgia,serif;font-weight:400;font-size:12px;letter-spacing:.5px",
+    src:"https://native-ads.appless.workers.dev/6a9bc07393e71f3ec9b12c81_i3pdeq/ad.js", base:[540,540], cta:"Learn more", verb:"See the S-Class in",
+    variants:[{n:"White"},{n:"Green"},{n:"Black"}] },
+  lego:{ name:"LEGO", h:"lego", domain:"lego.com", url:"https://www.lego.com/", color:"#e3000b", logo:"LEGO", ls:"font-weight:900;font-size:9px;font-style:italic",
+    src:"https://native-ads-dev.appless.workers.dev/6a96c6969e74536944c4167f_u008vu/ad.js", base:[540,540], cta:"Shop now",
+    variants:[{},{},{}] },
+  levis:{ name:"Levi's", h:"levis", domain:"levi.com", url:"https://www.levi.com/US/en_US/", color:"#c41230", logo:"LEVI'S", ls:"font-weight:900;font-size:7px",
+    src:"https://native-ads-dev.appless.workers.dev/6a96c6969e74536944c4167f_z64116/ad.js", base:[540,540], cta:"Shop now",
+    variants:[{n:"Baggy Overalls",url:"https://www.levi.com/US/en_US/clothing/women/overalls-jumpsuits/baggy-overalls/p/000UG0004"},{n:"Workwear Baggy Overalls",url:"https://www.levi.com/US/en_US/clothing/women/overalls-jumpsuits/workwear-baggy-overalls/p/008B60001"},{n:"Baggy Overalls, dark wash",url:"https://www.levi.com/US/en_US/clothing/women/overalls-jumpsuits/baggy-overalls/p/000UG0006"}] },
+  bentley:{ name:"Bentley", h:"bentleymotors", domain:"bentleymotors.com", url:"https://www.bentleymotors.com/", color:"#0b2b20", logo:"B", ls:"font-family:Georgia,serif;font-size:16px;font-weight:400", fontScan:true,
+    src:"https://native-ads.appless.workers.dev/6a9bc07393e71f3ec9b12c81_xogy7s/ad.js", base:[540,540], cta:"Learn more",
+    variants:[{n:"White"},{n:"Olive"},{n:"Blue"}] },
+  bose:{ name:"Best Buy", h:"bestbuy", domain:"bestbuy.com", url:"https://www.bestbuy.com/product/bose-quietcomfort-ultra-2nd-gen-true-wireless-noise-cancelling-in-ear-earbuds-black/6628900", color:"#0046be", logo:"BEST<br>BUY", ls:"font-weight:800;font-size:7.5px;line-height:1;text-align:center",
+    src:"https://native-ads-dev.appless.workers.dev/6a9733389e74536944cd96bd_baspn2/ad.js", base:[540,540], cta:"Shop now",
     variants:[{},{},{}] },
   gap:{ name:"Gap", h:"gap", domain:"gap.com", url:"https://www.gap.com/", color:"#0b2a5b", logo:"GAP", ls:"font-family:Georgia,serif;font-weight:400;font-size:10px;letter-spacing:.5px", adConfig:CFG_DV,
     src:"https://native-ads-dev.appless.workers.dev/mti1bs/ad.js", base:[540,540], cta:"Shop now", verb:"Shop",
@@ -295,9 +321,9 @@ window.addEventListener("error",function(e){var s=e.target;if(s&&s.tagName==="SC
   const fonts = b.fontScan ? `<script>(function(){var seen={},head=document.head||document.documentElement,until=Date.now()+3e4;function add(css){if(seen[css])return;seen[css]=1;var s=document.createElement("style");s.textContent=css;head.appendChild(s)}function scan(){try{var ps=document.getElementsByTagName("vertex-player");for(var i=0;i<ps.length;i++){var r=ps[i].shadowRoot;if(!r)continue;var n=r.querySelectorAll("style,link[rel=stylesheet]");for(var j=0;j<n.length;j++){var el=n[j];if(el.tagName==="LINK"){if(/fonts\\.googleapis\\.com/.test(el.href)&&!seen[el.href]){seen[el.href]=1;var l=document.createElement("link");l.rel="stylesheet";l.href=el.href;head.appendChild(l)}continue}var m=(el.textContent||"").match(/@font-face\\s*\\{[^}]*\\}/g);if(m)add(m.join(""))}}}catch(e){}if(Date.now()<until)setTimeout(scan,250)}scan()})();<\/script>` : "";
   return `<!doctype html><meta charset=utf-8><meta name=ad.orientation content=portrait,landscape><style>html,body{margin:0;height:100%;background:${b.bg||"#0d0d0f"};overflow:hidden;touch-action:manipulation;-webkit-tap-highlight-color:transparent}</style><script>${bridge}<\/script><script>var ExitApi=window.ExitApi||{exit:function(){}},clickTag="";<\/script>${cfg}${fonts}<script src=${b.src}><\/script>`;
 }
-function flickHost(brand){
+function flickHost(brand, ext=true){
   const id = "s"+(++slotSeq);
-  SLOTS[id] = { brand, variant:0, ready:false, touched:false };
+  SLOTS[id] = { brand, variant:0, ready:false, touched:false, ext };
   return `<div class="flick" data-slot="${id}"><div class="fstate load"></div></div>`;
 }
 function mountOne(host){
@@ -311,7 +337,7 @@ function mountOne(host){
   fit(); s.ro=new ResizeObserver(fit); s.ro.observe(host);
   host.prepend(f);
   s.poll=setInterval(()=>{ const r=f.contentDocument?.querySelector("vertex-player")?.shadowRoot; if(!r||!r.querySelector("button[data-vertex-diff]")) return; clearInterval(s.poll);
-    r.querySelectorAll("button:not([data-vertex-diff]),a").forEach(b=>{ if(/cta/i.test(String(b.className))||b.textContent.trim()||b.getAttribute("aria-label")) { b.setAttribute("data-ig-hide",""); b.style.setProperty("display","none","important"); } });
+    if(s.ext) r.querySelectorAll("button:not([data-vertex-diff]),a").forEach(b=>{ if(/cta/i.test(String(b.className))||b.textContent.trim()||b.getAttribute("aria-label")) { b.setAttribute("data-ig-hide",""); b.style.setProperty("display","none","important"); } });
     const st=document.createElement("style"); st.textContent="[data-ig-hide]{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important}"+(s.reel?"button[data-vertex-diff]{translate:"+(s.reel.dx||0)+"px "+s.reel.dy+"px!important}button:not([data-vertex-diff]):not([data-ig-hide]){translate:0 -468px!important}":""); r.appendChild(st); },120);
   s.timer=setTimeout(()=>{ if(!s.ready) host.querySelector(".fstate")?.classList.add("hide"); },9000);
 }
@@ -355,9 +381,9 @@ const FEED = [
   {a:"coast", loc:"Positano, Italy", img:"1561956021-947f09ae0101", likes:"4,812", com:"96", cap:"Woke up to this. Staying one more night.", when:"2 hours ago"},
   {ad:"gap", likes:"12.4K", com:"208", cap:"Three fall layers, one video. Tap a look to switch it."},
   {a:"dog", loc:"Cannon Beach, Oregon", img:"1530281700549-e82e7bf110d6", likes:"1,930", com:"74", cap:"Zero thoughts. Just beach.", when:"5 hours ago"},
-  {ad:"sony", likes:"8,106", com:"131", cap:"WH-CH720N. Pick your color right in the video."},
+  {ad:"merc", likes:"18.3K", com:"412", cap:"The new S-Class. Pick a finish in the video."},
   {a:"home", img:"1583847268964-b28dc8f51f92", likes:"2,247", com:"41", cap:"Sunday light in the front room. Nothing styled, promise.", when:"8 hours ago"},
-  {ad:"amex", likes:"5,390", com:"87", cap:"Small moments, made easy. Tap a Card to see it at the counter."},
+  {ad:"lego", likes:"26.1K", com:"538", cap:"Small brick. Big possibilities. Tap a car to switch the build."},
   {a:"tokyo", loc:"Shinjuku, Tokyo", img:"1601042879364-f3947d3f9c16", likes:"9,574", com:"152", cap:"Rain makes this city twice as bright.", when:"1 day ago"}
 ];
 function actions(likes,com){
@@ -387,10 +413,10 @@ function renderFeed(){
 
 // ---------- reels ----------
 const REELS = [
-  {a:"surf", img:"1559962219-f52ccd86944e", likes:"48.2K", com:"612", sh:"3,104", cap:"Dawn patrol. Nobody out but us.", au:"Original audio"},
   {ad:"zara", likes:"21.7K", com:"340", sh:"1,205", cap:"Three bombers, one Reel. Tap to switch."},
-  {a:"trail", img:"1761027436967-63584b301a77", likes:"17.9K", com:"228", sh:"954", cap:"Last mile before the ridge. Worth every step.", au:"Original audio"},
+  {a:"surf", img:"1559962219-f52ccd86944e", likes:"48.2K", com:"612", sh:"3,104", cap:"Dawn patrol. Nobody out but us.", au:"Original audio"},
   {ad:"acer", likes:"9,481", com:"175", sh:"602", cap:"Three laptops, one Reel. Tap to compare."},
+  {a:"trail", img:"1761027436967-63584b301a77", likes:"17.9K", com:"228", sh:"954", cap:"Last mile before the ridge. Worth every step.", au:"Original audio"},
   {a:"tokyo", img:"1586165877141-3dbcfc059283", likes:"63.5K", com:"1,048", sh:"7,730", cap:"The quiet streets are the best ones.", au:"Original audio"}
 ];
 function rail(r,img){
@@ -407,6 +433,20 @@ function renderReels(){
   }).join("");
   const io=new IntersectionObserver(es=>es.forEach(en=>{ en.isIntersecting ? mountOne(en.target) : unmountOne(en.target); $("#v-reels").classList.toggle("onad", !!$("#reels .flick iframe")); const bar=en.target.closest(".reel").querySelector(".rcta"); clearTimeout(bar._t); if(en.isIntersecting) bar._t=setTimeout(()=>bar.classList.add("hot"),2600); else bar.classList.remove("hot"); }),{root:$("#reels"),threshold:.5});
   $("#reels").querySelectorAll(".flick").forEach(h=>io.observe(h));
+}
+
+// ---------- explore ----------
+const XPH = ["1761309557847-ee63aed92a52","1760615303284-64a42fac2e98","1724582586458-a51791349977","1559627755-42212e5c5fdf","1618397806621-290788301ced","1687270282079-58b4689fed0f","1633321088768-b994237c8aa8","1626736637845-53045bb9695b","1634822929277-0c51ca0e8846","1552258698-f1a0635b71a8","1748199866497-98739ad95701","1581416271259-abec87515f51","1615233500064-caa995e2f9dd","1663756915436-c6842b9d3eb0","1604604994333-f1b0e9471186"];
+const XFL = ["levis","bentley","bose"];
+function renderExplore(){
+  const pat = ["F","s","s","s","s","s","s","Fr","s","s","s","s","F","s","s","s","s","s"];
+  let pi=0, fi=0;
+  $("#xgrid").innerHTML = pat.map(k=>{
+    if(k==="s"){ const id=XPH[pi++%XPH.length]; return `<div class="xt" style="background-image:url(${U(id,400,400)})">${pi%4===2?`<span class="ri">${I.reel(18,true)}</span>`:""}</div>`; }
+    return `<div class="xt big${k==="Fr"?" r":""}" data-fmt="explore">${flickHost(XFL[fi++],false)}</div>`;
+  }).join("");
+  const io=new IntersectionObserver(es=>es.forEach(en=>{ en.isIntersecting ? mountOne(en.target) : unmountOne(en.target); }),{root:$("#xgrid"),rootMargin:"60px 0px"});
+  $("#xgrid").querySelectorAll(".flick").forEach(h=>io.observe(h));
 }
 
 // ---------- stories ----------
@@ -463,13 +503,14 @@ addEventListener("keydown", e=>{
 let VIEW="home";
 function setDark(){ $("#phone").classList.toggle("dark", ST.on || VIEW==="reels"); document.body.classList.toggle("at-home", VIEW==="home" && !ST.on); }
 function show(v){
-  VIEW=v; $("#v-home").classList.toggle("on",v==="home"); $("#v-reels").classList.toggle("on",v==="reels");
-  $("#tabs").innerHTML=`<button onclick="show('home')" aria-label="Home">${v==="home"?I.home(26):I.homeO(26)}</button><button aria-label="Search">${I.search(26)}</button><button aria-label="Create">${I.plus(26)}</button><button onclick="show('reels')" aria-label="Reels">${I.reel(26,v==="reels")}</button><button aria-label="Profile"><span class="pf" style="background-image:url(${U(ME,80,80)})"></span></button>`;
+  VIEW=v; $("#v-home").classList.toggle("on",v==="home"); $("#v-reels").classList.toggle("on",v==="reels"); $("#v-explore").classList.toggle("on",v==="explore");
+  if(v==="reels") $("#reels").scrollTop=0;
+  $("#tabs").innerHTML=`<button onclick="show('home')" aria-label="Home">${v==="home"?I.home(26):I.homeO(26)}</button><button onclick="show('explore')" aria-label="Search">${I.search(26)}</button><button aria-label="Create">${I.plus(26)}</button><button onclick="show('reels')" aria-label="Reels">${I.reel(26,v==="reels")}</button><button aria-label="Profile"><span class="pf" style="background-image:url(${U(ME,80,80)})"></span></button>`;
   setDark();
 }
 
 // ---------- ad format selector ----------
-const FMTS = [["Reels ads","reels","Zara, Acer"],["Stories ads","stories","Coach, Cadillac, Nike"],["Feed ads","feed","Gap, Sony, Amex"]];
+const FMTS = [["Reels ads","reels","Zara, Acer"],["Stories ads","stories","Coach, Cadillac, Nike"],["Feed ads","feed","Gap, Mercedes, LEGO"],["Explore tiles","explore","Levi's, Bentley, Bose"]];
 function toggleGuide(force){
   const p=$("#gpanel"), on = typeof force==="boolean" ? force : !p.classList.contains("on");
   p.classList.toggle("on",on); $("#gscrim").classList.toggle("on",on); $("#gpill").setAttribute("aria-expanded",on);
@@ -480,7 +521,8 @@ function jump(f){
   document.querySelectorAll(".gitem").forEach(el=>el.classList.toggle("cur",el.dataset.f===f));
   if(f==="stories"){ openStory(STORIES.findIndex(p=>p.ad)); pulse($("#story .smedia")); return; }
   closeStory();
-  if(f==="reels"){ show("reels"); const el=$('#reels [data-fmt="reels"]'); $("#reels").scrollTop=el.offsetTop; pulse(el.querySelector(".rfl")); }
+  if(f==="explore"){ show("explore"); $("#xgrid").scrollTop=0; pulse($('#xgrid [data-fmt="explore"]')); }
+  else if(f==="reels"){ show("reels"); const el=$('#reels [data-fmt="reels"]'); $("#reels").scrollTop=el.offsetTop; pulse(el.querySelector(".rfl")); }
   else { show("home"); const el=$('#feed [data-fmt="feed"]'); $("#feed").scrollTop=el.offsetTop-$("#feed").offsetTop-40; pulse(el.querySelector(".media")); }
 }
 function fitPhone(){
@@ -492,8 +534,9 @@ addEventListener("resize",fitPhone);
 $("#hdic").innerHTML=`<span class="dot">${I.heart(26)}</span><span class="dot">${I.chat(26)}</span>`;
 $("#rcam").innerHTML=I.cam(26);
 $("#gpanel").innerHTML=`<h6>Flicks on Instagram</h6>`+FMTS.map(([t,f,b],i)=>`<button class="gitem" data-f="${f}" onclick="jump('${f}')"><span class="n">${i+1}</span>${t}<span class="b">${b}</span></button>`).join("");
-renderFeed(); renderReels(); show("home"); fitPhone();
-const H0=location.hash.replace("#",""); if(["reels","stories","feed"].includes(H0)) setTimeout(()=>jump(H0),300);
+$("#srch").innerHTML=I.search(17)+"<span>Search</span>";
+renderFeed(); renderReels(); renderExplore(); show("home"); fitPhone();
+const H0=location.hash.replace("#",""); if(["reels","stories","feed","explore"].includes(H0)) setTimeout(()=>jump(H0),300);
 </script>
 </body>
 </html>
