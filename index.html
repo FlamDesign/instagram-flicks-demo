@@ -157,6 +157,7 @@ svg{display:block}
 .gitem .n{width:18px;flex:none;color:#9aa1a8;font-size:12px}
 .gitem .b{margin-left:auto;font-size:11px;color:#9aa1a8;flex:none}
 
+#v-explore{container-type:inline-size}
 #dm{position:absolute;inset:0;z-index:40;background:#fff;display:none;flex-direction:column;padding-top:var(--sbh)}
 #dm.on{display:flex}
 .dmh{flex:none;height:50px;display:flex;align-items:center;gap:12px;padding:0 14px;font-size:18px;font-weight:700;border-bottom:.5px solid #efefef}
@@ -186,10 +187,10 @@ svg{display:block}
 .dmc i{width:34px;height:34px;border-radius:50%;background:#3797f0;color:#fff;display:grid;place-items:center}
 .dmc span{flex:1}
 .srch{margin:8px 14px 10px;height:36px;border-radius:10px;background:#efefef;display:flex;align-items:center;gap:8px;padding:0 12px;color:#737373;font-size:15px}
-.xgrid{flex:1;overflow-y:auto;overscroll-behavior:contain;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;grid-auto-flow:dense;align-content:start;scrollbar-width:none;background:#fff}
+.xgrid{flex:1;overflow-y:auto;overscroll-behavior:contain;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;grid-auto-flow:dense;grid-auto-rows:calc((100cqw - 4px) / 3);align-content:start;scrollbar-width:none;background:#fff}
 .xgrid::-webkit-scrollbar{display:none}
-.xt{position:relative;aspect-ratio:1;background:#efefef center/cover;overflow:hidden;color:#fff}
-.xt.big{grid-column:1/span 2;grid-row:span 2;aspect-ratio:auto}
+.xt{position:relative;background:#efefef center/cover;overflow:hidden;color:#fff}
+.xt.big{grid-column:1/span 2;grid-row:span 2}
 .xt.big.r{grid-column:2/span 2}
 .xt .ri{position:absolute;right:7px;top:7px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}
 .rfl .rail{top:auto;bottom:12px;right:6px;gap:16px}
