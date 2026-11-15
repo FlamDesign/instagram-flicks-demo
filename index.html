@@ -158,6 +158,11 @@ svg{display:block}
 .gitem .b{margin-left:auto;font-size:11px;color:#9aa1a8;flex:none}
 
 #v-explore{container-type:inline-size}
+.xt .tap{position:absolute;inset:0;z-index:3}
+#xp{position:absolute;inset:0 0 50px 0;z-index:30;background:#fff;display:none;flex-direction:column;padding-top:var(--sbh)}
+#xp.on{display:flex}
+.xpb{flex:1;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none}
+.xpb::-webkit-scrollbar{display:none}
 #dm{position:absolute;inset:0;z-index:40;background:#fff;display:none;flex-direction:column;padding-top:var(--sbh)}
 #dm.on{display:flex}
 .dmh{flex:none;height:50px;display:flex;align-items:center;gap:12px;padding:0 14px;font-size:18px;font-weight:700;border-bottom:.5px solid #efefef}
@@ -241,6 +246,7 @@ svg{display:block}
       <div class="xgrid" id="xgrid"></div>
     </section>
     <nav class="tabs" id="tabs"></nav>
+    <div id="xp"></div>
     <div id="dm"></div>
     <div id="story"></div>
     <div id="sheet" onclick="if(event.target===this)closeSite()"></div>
@@ -483,11 +489,25 @@ function renderExplore(){
   let pi=0, fi=0;
   $("#xgrid").innerHTML = pat.map(k=>{
     if(k==="s"){ const id=XPH[pi++%XPH.length]; return `<div class="xt" style="background-image:url(${U(id,400,400)})">${pi%4===2?`<span class="ri">${I.reel(18,true)}</span>`:""}</div>`; }
-    return `<div class="xt big${k==="Fr"?" r":""}" data-fmt="explore">${flickHost(XFL[fi++])}</div>`;
+    const b=XFL[fi++]; return `<div class="xt big${k==="Fr"?" r":""}" data-fmt="explore">${flickHost(b)}<button class="tap" onclick="openX('${b}')" aria-label="Open ${BR[b].name}"></button></div>`;
   }).join("");
   const io=new IntersectionObserver(es=>es.forEach(en=>{ en.isIntersecting ? mountOne(en.target) : unmountOne(en.target); }),{root:$("#xgrid"),rootMargin:"60px 0px"});
   $("#xgrid").querySelectorAll(".flick").forEach(h=>io.observe(h));
 }
+
+const XCAP = {levis:["Quality never goes out of style.","14.2K","236"], bentley:["Beyond the ordinary.","22.8K","391"], bose:["Bose QuietComfort Ultra Earbuds. Now at Best Buy.","9,764","158"]};
+function openX(b){
+  closeX(); const B=BR[b], host=flickHost(b), id="s"+slotSeq, [cap,likes,com]=XCAP[b];
+  $("#xp").innerHTML=`<div class="dmh"><button onclick="closeX()" aria-label="Back">${BACK}</button><span>Explore</span></div><div class="xpb">
+    <article class="post" data-fmt="xp"><div class="ph">${bav(b)}<div class="who"><b>${B.h}${I.vf}</b><small>Sponsored</small></div><button class="more" aria-label="More">${I.more(22)}</button></div>
+      <div class="media q">${host}</div>
+      <button class="ctab hot" onclick="openSite('${id}')"><span data-cta="${id}">${B.cta}</span>${I.chev(18)}</button>
+      ${actions(likes,com)}<div class="cap"><b>${B.h}</b> ${esc(cap)}</div></article>`+
+    FEED.filter(p=>p.a).slice(1,3).map(p=>{ const A=AC[p.a]; return `<article class="post"><div class="ph">${pav(A.av)}<div class="who"><b>${A.h}</b>${p.loc?`<small>${p.loc}</small>`:""}</div><button class="more" aria-label="More">${I.more(22)}</button></div>
+      <div class="media o"><img src="${U(p.img,900,1125)}" alt="" loading="lazy"></div>${actions(p.likes,p.com)}<div class="cap"><b>${A.h}</b> ${esc(p.cap)}</div><div class="when">${p.when}</div></article>`; }).join("")+`</div>`;
+  $("#xp").classList.add("on"); mountOne($("#xp .flick"));
+}
+function closeX(){ const h=$("#xp .flick"); h&&unmountOne(h); $("#xp").classList.remove("on"); $("#xp").innerHTML=""; }
 
 // ---------- messages ----------
 const DMS = [
@@ -564,7 +584,7 @@ function stepStory(d){
   ST.p=p; ST.i=i; drawStory();
 }
 addEventListener("keydown", e=>{
-  if(e.key==="Escape"){ if($("#sheet").classList.contains("on")) closeSite(); else if(ST.on) closeStory(); else closeDM(); toggleGuide(false); }
+  if(e.key==="Escape"){ if($("#sheet").classList.contains("on")) closeSite(); else if(ST.on) closeStory(); else if(DM.on) closeDM(); else closeX(); toggleGuide(false); }
   if(ST.on && !ST.hold){ if(e.key==="ArrowRight") stepStory(1); if(e.key==="ArrowLeft") stepStory(-1); }
 });
 
@@ -572,7 +592,7 @@ addEventListener("keydown", e=>{
 let VIEW="home";
 function setDark(){ $("#phone").classList.toggle("dark", ST.on || VIEW==="reels"); document.body.classList.toggle("at-home", VIEW==="home" && !ST.on && !DM.on); }
 function show(v){
-  VIEW=v; $("#v-home").classList.toggle("on",v==="home"); $("#v-reels").classList.toggle("on",v==="reels"); $("#v-explore").classList.toggle("on",v==="explore");
+  closeX(); VIEW=v; $("#v-home").classList.toggle("on",v==="home"); $("#v-reels").classList.toggle("on",v==="reels"); $("#v-explore").classList.toggle("on",v==="explore");
   if(v==="reels") $("#reels").scrollTop=0;
   $("#tabs").innerHTML=`<button onclick="show('home')" aria-label="Home">${v==="home"?I.home(26):I.homeO(26)}</button><button onclick="show('explore')" aria-label="Search">${I.search(26)}</button><button aria-label="Create">${I.plus(26)}</button><button onclick="show('reels')" aria-label="Reels">${I.reel(26,v==="reels")}</button><button aria-label="Profile"><span class="pf" style="background-image:url(${U(ME,80,80)})"></span></button>`;
   setDark();
