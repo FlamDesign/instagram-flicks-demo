@@ -176,7 +176,8 @@ svg{display:block}
 .dmb .ts{align-self:center;font-size:12px;color:#737373;margin:8px 0 10px}
 .bub{align-self:flex-start;max-width:74%;margin-left:40px;background:#efefef;border-radius:20px;padding:9px 14px;font-size:14.5px;line-height:1.35}
 .brow{display:flex;align-items:flex-end;gap:8px}
-.brow .bub{margin-left:0}
+.brow .bub,.brow .fcard{margin-left:0}
+.brow .fcard{max-width:none}
 .fcard{align-self:flex-start;margin-left:40px;width:266px;max-width:74%;border-radius:20px;overflow:hidden;background:#efefef;position:relative}
 .fcard .fm{position:relative}
 .fcard .cb{display:flex;align-items:center;justify-content:space-between;width:100%;height:44px;padding:0 14px;font-weight:600;font-size:14px;text-align:left}
@@ -408,7 +409,7 @@ function openSite(slotId, url){
   ST.hold=true;
   $("#sheet").innerHTML=`<div class="web" role="dialog" aria-label="${esc(B.domain)}">
     <div class="bar"><button onclick="closeSite()" aria-label="Close">${I.x(22)}</button><div class="url"><b>${I.lock(11)}${esc(B.domain)}</b><small>${esc(B.name)}</small></div><button aria-label="More">${I.more(22)}</button></div><div class="ld"></div>
-    <div class="bd">${bav(s.brand,64)}<h3>${esc(s.touched&&v.n ? v.n : B.name)}</h3><p>The ad opens ${esc(B.domain)} here, inside the app, on the product the viewer picked in the video.</p><a href="${esc(url)}" target="_blank" rel="noopener">Continue to ${esc(B.domain)}</a></div></div>`;
+    <div class="bd">${bav(s.brand,64)}<h3>${esc(s.touched&&v.n ? v.n : B.name)}</h3><a href="${esc(url)}" target="_blank" rel="noopener">Continue to ${esc(B.domain)}</a></div></div>`;
   $("#sheet").classList.add("on");
 }
 function closeSite(){ $("#sheet").classList.remove("on"); ST.hold=false; ST.t0=Date.now()-ST.el; }
@@ -416,13 +417,13 @@ function closeSite(){ $("#sheet").classList.remove("on"); ST.hold=false; ST.t0=D
 // ---------- feed ----------
 const FEED = [
   {a:"coast", loc:"Positano, Italy", img:"1561956021-947f09ae0101", likes:"4,812", com:"96", cap:"Woke up to this. Staying one more night.", when:"2 hours ago"},
-  {ad:"cayman", likes:"31.4K", com:"627", cap:"The VaCay you deserve. Tap to pick your kind of day."},
+  {ad:"cayman", likes:"31.4K", com:"627", cap:"The VaCay you deserve."},
   {a:"dog", loc:"Cannon Beach, Oregon", img:"1530281700549-e82e7bf110d6", likes:"1,930", com:"74", cap:"Zero thoughts. Just beach.", when:"5 hours ago"},
-  {ad:"gap", likes:"12.4K", com:"208", cap:"Three fall layers, one video. Tap a look to switch it."},
+  {ad:"gap", likes:"12.4K", com:"208", cap:"Fall layers are here."},
   {a:"home", img:"1583847268964-b28dc8f51f92", likes:"2,247", com:"41", cap:"Sunday light in the front room. Nothing styled, promise.", when:"8 hours ago"},
-  {ad:"merc", likes:"18.3K", com:"412", cap:"The new S-Class. Pick a finish in the video."},
+  {ad:"merc", likes:"18.3K", com:"412", cap:"The new S-Class."},
   {a:"tokyo", loc:"Shinjuku, Tokyo", img:"1601042879364-f3947d3f9c16", likes:"9,574", com:"152", cap:"Rain makes this city twice as bright.", when:"1 day ago"},
-  {ad:"lego", likes:"26.1K", com:"538", cap:"Small brick. Big possibilities. Tap a car to switch the build."}
+  {ad:"lego", likes:"26.1K", com:"538", cap:"Small brick. Big possibilities."}
 ];
 function actions(likes,com){
   return `<div class="act"><button onclick="this.classList.toggle('liked')" aria-label="Like">${I.heart(25)}${likes}</button><button aria-label="Comment">${I.chat(25)}${com}</button><button aria-label="Share">${I.send(25)}</button><button class="sv" onclick="this.classList.toggle('saved')" aria-label="Save">${I.save(25)}</button></div>`;
@@ -451,9 +452,9 @@ function renderFeed(){
 
 // ---------- reels ----------
 const REELS = [
-  {ad:"zara", likes:"21.7K", com:"340", sh:"1,205", cap:"Three bombers, one Reel. Tap to switch."},
+  {ad:"zara", likes:"21.7K", com:"340", sh:"1,205", cap:"Sale now on. Online and in stores."},
   {a:"surf", img:"1559962219-f52ccd86944e", likes:"48.2K", com:"612", sh:"3,104", cap:"Dawn patrol. Nobody out but us.", au:"Original audio"},
-  {ad:"acer", likes:"9,481", com:"175", sh:"602", cap:"Three laptops, one Reel. Tap to compare."},
+  {ad:"acer", likes:"9,481", com:"175", sh:"602", cap:"The fastest, most intelligent Windows PCs ever."},
   {a:"trail", img:"1761027436967-63584b301a77", likes:"17.9K", com:"228", sh:"954", cap:"Last mile before the ridge. Worth every step.", au:"Original audio"},
   {a:"tokyo", img:"1586165877141-3dbcfc059283", likes:"63.5K", com:"1,048", sh:"7,730", cap:"The quiet streets are the best ones.", au:"Original audio"}
 ];
@@ -489,11 +490,11 @@ function renderExplore(){
 
 // ---------- messages ----------
 const DMS = [
-  {b:"nike", t:"2m", un:1, msgs:["Universa is here. Three looks, built to move with you.","Tap a look in the video to switch it."]},
+  {b:"nike", t:"2m", un:1, msgs:["Universa is here. Built to move with you."]},
   {a:"coast", t:"1h", pv:"Sent a reel by saltline.surf"},
-  {b:"airbnb", t:"3h", un:1, msgs:["Your next stay, three ways.","Tap a home in the video to step inside."]},
+  {b:"airbnb", t:"3h", un:1, msgs:["Homes with a story. Find your next stay."]},
   {a:"dog", t:"5h", pv:"Liked a message"},
-  {b:"bark", t:"1d", msgs:["This month's box just dropped.","Tap a toy in the video to see it in action."]},
+  {b:"bark", t:"1d", msgs:["This month's box just dropped."]},
   {a:"home", t:"1d", pv:"Seen yesterday"},
   {a:"trail", t:"2d", pv:"That ridge though"}
 ];
@@ -511,8 +512,7 @@ function drawThread(i){
   const d=DMS[i], B=BR[d.b], host=flickHost(d.b), id="s"+slotSeq; d.un=0;
   $("#dm").innerHTML=`<div class="dmh"><button onclick="drawInbox()" aria-label="Back">${BACK}</button>${bav(d.b,34)}<div class="who"><b>${B.h}${I.vf}</b><small>Business chat</small></div><span class="sp">${I.more(24)}</span></div>
     <div class="dmb"><div class="ts">Today</div><div class="bub">${esc(d.msgs[0])}</div>
-      <div class="fcard" data-fmt="dm"><div class="fm" style="aspect-ratio:${B.base[0]}/${B.base[1]}">${host}</div><button class="cb" onclick="openSite('${id}')"><span data-cta="${id}">${B.cta}</span>${I.chev(18)}</button></div>
-      <div class="brow">${bav(d.b,32)}<div class="bub">${esc(d.msgs[1])}</div></div></div>
+      <div class="brow">${bav(d.b,32)}<div class="fcard" data-fmt="dm"><div class="fm" style="aspect-ratio:${B.base[0]}/${B.base[1]}">${host}</div><button class="cb" onclick="openSite('${id}')"><span data-cta="${id}">${B.cta}</span>${I.chev(18)}</button></div></div></div>
     <div class="dmc"><i>${I.cam(20)}</i><span>Message...</span>${I.heart(24)}</div>`;
   mountOne($("#dm .flick"));
 }
